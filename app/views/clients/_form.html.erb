@@ -1,0 +1,18 @@
+<%= simple_form_for(@client, :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :company %>
+    <%= f.input :phone1 %>
+    <%= f.input :phone2 %>
+    <%= f.input :phone3 %>
+    <%= f.input :email %>
+    <%= f.input :address, :input_html => { :rows => 5 } %>
+    <%= f.input :leadsource, collection: ["Website","Approved Index","SEO Quotes","Referral","Other"], prompt: "Select..." %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+  </div>
+<% end %>

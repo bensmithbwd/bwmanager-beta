@@ -1,0 +1,39 @@
+<div class="pull-right">
+	<%= link_to 'New Client', new_client_path, :class => 'btn' %>
+	<%= link_to 'New Campaign', new_campaign_path, :class => 'btn' %>
+</div>
+
+<h3>Campaigns</h3>
+
+<table class='table table-condensed table-striped'>
+<thead>
+  <tr>
+    <th>Client</th>
+    <th>Url</th>
+    <th>Keyphrase</th>
+    <th>Type</th>
+    <th>Start</th>
+    <th>Length</th>
+    <th>Autoemails</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+<% @campaigns.each do |campaign| %>
+  <tr>
+    <td><%= campaign.client.name %> (<%= campaign.client.company %>)</td>
+    <td><%= campaign.url %></td>
+    <td><%= campaign.keyphrase %></td>
+    <td><%= campaign.ctype %></td>
+    <td><%= campaign.start %></td>
+    <td><%= campaign.length %></td>
+    <td><%= campaign.autoemails %></td>
+    <td><%= link_to 'Show', campaign, :class => 'btn btn-mini' %></td>
+    <td><%= link_to 'Edit', edit_campaign_path(campaign), :class => 'btn btn-mini' %></td>
+    <td><%= link_to 'Destroy', campaign, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>

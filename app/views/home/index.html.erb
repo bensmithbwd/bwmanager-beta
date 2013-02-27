@@ -1,0 +1,47 @@
+<div class="pull-right">
+	<%= link_to 'New Client', new_client_path, :class => 'btn' %>
+	<%= link_to 'New Campaign', new_campaign_path, :class => 'btn' %>
+</div>
+
+<h3>Campaigns</h3>
+<pre><%= @sql_debug %></pre>
+<table class='table table-condensed table-striped'>
+<thead>
+  <tr>
+  	<th>Action Date</th>
+    <th>Client</th>
+    <th>Url</th>
+    <th>Keyphrase</th>
+    <th>Type</th>
+    <th>Start</th>
+    <th>Length</th>
+    <th>Autoemails</th>
+  </tr>
+</thead>
+<tbody>
+<% @danger_campaigns.each do |campaign| %>
+  <tr class='error'>
+  	<td><%= campaign.start + campaign.length.days %></td>
+    <td><%= campaign.client.name %> (<%= campaign.client.company %>)</td>
+    <td><%= campaign.url %></td>
+    <td><%= campaign.keyphrase %></td>
+    <td><%= campaign.ctype %></td>
+    <td><%= campaign.start %></td>
+    <td><%= campaign.length %></td>
+    <td><%= campaign.autoemails %></td>
+  </tr>
+<% end %>
+<% @warning_campaigns.each do |campaign| %>
+  <tr class='warning'>
+  	<td><%= campaign.start + campaign.length.days %></td>
+    <td><%= campaign.client.name %> (<%= campaign.client.company %>)</td>
+    <td><%= campaign.url %></td>
+    <td><%= campaign.keyphrase %></td>
+    <td><%= campaign.ctype %></td>
+    <td><%= campaign.start %></td>
+    <td><%= campaign.length %></td>
+    <td><%= campaign.autoemails %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>

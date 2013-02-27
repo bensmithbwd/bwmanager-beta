@@ -1,0 +1,45 @@
+<h3>Client</h3>
+
+<p>
+  <b>Name:</b>
+  <%= @client.name %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%= @client.company %>
+</p>
+
+<p>
+  <b>Phone1:</b>
+  <%= @client.phone1 %>
+</p>
+
+<p>
+  <b>Phone2:</b>
+  <%= @client.phone2 %>
+</p>
+
+<p>
+  <b>Phone3:</b>
+  <%= @client.phone3 %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @client.email %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @client.address %>
+</p>
+
+<p>
+  <b>Leadsource:</b>
+  <%= @client.leadsource %>
+</p>
+
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>

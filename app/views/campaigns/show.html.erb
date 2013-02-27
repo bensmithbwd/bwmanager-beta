@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Client:</b>
+  <%= @campaign.client.name %> (<%= @campaign.client.company %>)
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @campaign.url %>
+</p>
+
+<p>
+  <b>Keyphrase:</b>
+  <%= @campaign.keyphrase %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @campaign.ctype %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%= @campaign.start %>
+</p>
+
+<p>
+  <b>Length:</b>
+  <%= @campaign.length %>
+</p>
+
+<p>
+  <b>Autoemails:</b>
+  <%= @campaign.autoemails %>
+</p>
+
+
+<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<%= link_to 'Back', campaigns_path %>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  client: 
+  url: MyString
+  keyphrase: MyString
+  type: 
+  start: 2013-02-26
+  length: 
+  autoemails: 
+
+two:
+  client: 
+  url: MyString
+  keyphrase: MyString
+  type: 
+  start: 2013-02-26
+  length: 
+  autoemails: 
