@@ -6,7 +6,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 gem 'jquery-rails'
-gem "thin", ">= 1.5.0"
+#gem "thin", ">= 1.5.0"
 gem "mysql2", ">= 0.3.11"
 gem "bootstrap-sass", ">= 2.3.0.0"
 gem "devise", ">= 2.2.3"
