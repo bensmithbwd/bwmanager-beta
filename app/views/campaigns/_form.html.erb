@@ -3,6 +3,9 @@
 
   <div class="form-inputs">
     <%= f.association :client %>
+    <%= f.input :url, :wrapper => :append do %>
+    	<span class="add-on">http://www.</span><%= f.input_field :url %>
+    <% end %>
     <%= f.input :keyphrase, :input_html => {:class => 'span4' } %>
     <%= f.input :ctype, :input_html => {:class => 'span2' }, collection: ["2LT","2TAM","2TFM","2TSNP","3TSN","4SN","5TP","8PN","8SN","CAB","FM","SWM"], prompt: "Select..." %>
     <%= f.input :start, :input_html => {:class => 'span1' }, order: [:day, :month, :year] %>
