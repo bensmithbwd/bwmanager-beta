@@ -43,5 +43,3 @@ SimpleForm.setup do |config|
   # buttons and other elements.
   config.default_wrapper = :bootstrap
 end
-
-p "RAN THE INITIALIZER"
