@@ -7,4 +7,6 @@ class Campaign < ActiveRecord::Base
   validates :start, :presence => true
   validates :ctype, :presence => true
   validates :url, :presence => true
+  validates_format_of :url, :without => /\Ahttp/
+  validates_format_of :url, :without => /\Awww/
 end
