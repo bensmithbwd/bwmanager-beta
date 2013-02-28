@@ -4,8 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Bwmanager" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Bwmanager" %>">
-    <link rel="shortcut icon" href="/favicon.png" />
-	<link rel="apple-touch-icon-precomposed" href="/favicon.png" />
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
