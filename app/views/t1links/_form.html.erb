@@ -1,0 +1,13 @@
+<%= simple_form_for(@t1link, :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :keyphrase, label_method: :keyphrase, :input_html => {:class => 'keyphrase_id_ajax' } %>
+    <%= f.input :links, :input_html => {:class => 'span9' } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to "Cancel", t1links_path, :class => 'btn pull-right' %>
+  </div>
+<% end %>

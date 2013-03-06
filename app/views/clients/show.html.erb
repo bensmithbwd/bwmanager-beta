@@ -1,14 +1,12 @@
-<h3>Client</h3>
-
-<p>
-  <b>Name:</b>
-  <%= @client.name %>
-</p>
-
-<p>
-  <b>Company:</b>
-  <%= @client.company %>
-</p>
+<div class="page-header">
+  <h1>
+  	<%= @client.name %> <small><%= @client.company %></small>
+  	<div class='pull-right'>
+  		<%= link_to ("<i class='icon-pencil'></i> Edit Client").html_safe, edit_client_path(@client), :class => 'btn' %>
+  		<%= link_to "Back", request.referer, :class => 'btn' %>
+  	</div>  	
+	</h1>
+</div>
 
 <p>
   <b>Phone1:</b>
@@ -39,7 +37,3 @@
   <b>Leadsource:</b>
   <%= @client.leadsource %>
 </p>
-
-
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>

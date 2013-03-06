@@ -1,83 +1,53 @@
 class CampaignsController < ApplicationController
-  # GET /campaigns
-  # GET /campaigns.json
+  load_and_authorize_resource
+  
   def index
-    @campaigns = Campaign.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @campaigns }
-    end
+    @q = Campaign.search(params[:q])
+    @campaigns = @q.result(:distinct => true).paginate(:page => params[:page], :per_page => 30)
   end
 
-  # GET /campaigns/1
-  # GET /campaigns/1.json
   def show
-    @campaign = Campaign.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @campaign }
-    end
+    redirect_to campaigns_path
   end
-
-  # GET /campaigns/new
-  # GET /campaigns/new.json
+  
   def new
-    @campaign = Campaign.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @campaign }
-    end
+    @campaign = Campaign.new    
+    @campaign_dates = Campaign.ttype_dates + Campaign.links_index_dates
   end
 
-  # GET /campaigns/1/edit
   def edit
     @campaign = Campaign.find(params[:id])
+    @campaign_dates = Campaign.ttype_dates + Campaign.links_index_dates
   end
 
-  # POST /campaigns
-  # POST /campaigns.json
   def create
     @campaign = Campaign.new(params[:campaign])
-
-    respond_to do |format|
-      if @campaign.save
-        format.html { redirect_to @campaign, notice: 'Campaign was successfully created.' }
-        format.json { render json: @campaign, status: :created, location: @campaign }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @campaign.errors, status: :unprocessable_entity }
-      end
+    if @campaign.save
+      redirect_to campaigns_path, notice: "Campaign [#{@campaign.id}] was successfully created."
+    else
+      render action: "new"
     end
   end
 
-  # PUT /campaigns/1
-  # PUT /campaigns/1.json
   def update
     @campaign = Campaign.find(params[:id])
-
-    respond_to do |format|
-      if @campaign.update_attributes(params[:campaign])
-        format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @campaign.errors, status: :unprocessable_entity }
-      end
+    if @campaign.update_attributes(params[:campaign])
+      redirect_to campaigns_path, notice: "Campaign [#{@campaign.id}] was successfully updated."
+    else
+      render action: "edit"
     end
   end
 
-  # DELETE /campaigns/1
-  # DELETE /campaigns/1.json
+  def duplicate
+    campaign_to_duplicate = Campaign.find(params[:id])
+    new_campaign = campaign_to_duplicate.dup
+    new_campaign.save
+    redirect_to campaigns_path, notice: "Campaign [#{campaign_to_duplicate.id}] was successfully duplicated to Campaign [#{new_campaign.id}]."
+  end
+
   def destroy
     @campaign = Campaign.find(params[:id])
-    @campaign.destroy
-
-    respond_to do |format|
-      format.html { redirect_to campaigns_url }
-      format.json { head :no_content }
-    end
+    @campaign.destroy    
+    redirect_to campaigns_path
   end
 end

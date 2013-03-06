@@ -1,0 +1,25 @@
+<div id="new_client_modal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+<%= simple_form_for(Client.new, :html => {:class => 'form-horizontal'}, :remote => true, :validate => true) do |f| %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">New Client</h3>    
+  </div>
+  <div class="modal-body">
+		<%= f.error_notification %>
+	  <div class="form-inputs">
+	    <%= f.input :name %>
+	    <%= f.input :company %>
+	    <%= f.input :phone1 %>
+	    <%= f.input :phone2 %>
+	    <%= f.input :phone3 %>
+	    <%= f.input :email %>
+	    <%= f.input :address, :input_html => { :rows => 5 } %>
+	    <%= f.input :leadsource, collection: ["Website","Approved Index","SEO Quotes","Referral","Other"], prompt: "Select..." %>
+	  </div>
+  </div>
+  <div class="modal-footer">
+    	<%= f.button :submit, :class => 'btn btn-primary pull-left' %>
+    	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+  </div>
+<% end %>
+</div>

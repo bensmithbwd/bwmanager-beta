@@ -1,29 +1,33 @@
-<div class="pull-right">
-	<%= link_to 'New Client', new_client_path, :class => 'btn' %>
-	<%= link_to 'New Campaign', new_campaign_path, :class => 'btn' %>
-</div>
+<%= search_form_for(@q, :html => {:class => 'form-inline' }) do |f| %>
+  <div class="pull-right">
+    <%= f.text_field :name_or_company_or_phone1_or_phone2_or_phone3_or_email_or_address_or_leadsource_cont, :class => 'span2 search-query', :placeholder => 'Search...' %>
+    <%= link_to ("<p class='text-right'><br><i class='icon-remove'></i> Remove Filters</p>").html_safe, clients_path if params[:q] %>
+  </div>
+<% end %>
 
-<h3>Clients</h3>
+<div class="page-header">
+  <h1>Clients <small>I'd like to take this opportunity to introduce the pack</small></h1>
+</div>
 
 <table class='table table-condensed table-striped'>
   <thead>
   	<tr>
-	    <th>Name</th>
-	    <th>Company</th>
-	    <th>Phone1</th>
-	    <th>Phone2</th>
-	    <th>Phone3</th>
-	    <th>Email</th>
-	    <th>Address</th>
-	    <th>Leadsource</th>
-	    <th></th>
-	    <th></th>
+    	<th><%= sort_link @q, :id, "#" %></th>
+    	<th><%= sort_link @q, :name, "Name" %></th>
+    	<th><%= sort_link @q, :company, "Company" %></th>
+    	<th><%= sort_link @q, :phone1, "Phone1" %></th>
+    	<th><%= sort_link @q, :phone2, "Phone2" %></th>
+    	<th><%= sort_link @q, :phone3, "Phone3" %></th>
+    	<th><%= sort_link @q, :email, "Email" %></th>
+    	<th><%= sort_link @q, :address, "Address" %></th>
+    	<th><%= sort_link @q, :leadsource, "Leadsource" %></th>
 	    <th></th>
 	  </tr>
 	</thead>
 	<tbody>
 <% @clients.each do |client| %>
   <tr>
+    <td><%= client.id %></td>
     <td><%= client.name %></td>
     <td><%= client.company %></td>
     <td><%= client.phone1 %></td>
@@ -32,10 +36,14 @@
     <td><%= client.email %></td>
     <td><%= client.address %></td>
     <td><%= client.leadsource %></td>
-    <td><%= link_to 'Show', client, :class => 'btn btn-mini' %></td>
-    <td><%= link_to 'Edit', edit_client_path(client), :class => 'btn btn-mini' %></td>
-    <td><%= link_to 'Destroy', client, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you wish to delete #{client.name} (#{client.company})?" } %></td>
+    <td>
+    	<%= link_to ("<i class='icon-search icon-white'></i>").html_safe, client, :class => 'btn btn-mini btn-info' %>
+    	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_client_path(client), :class => 'btn btn-mini' %>
+    	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, client, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you wish to delete #{client.name} (#{client.company})? *WARNING* This will delete ALL associated campaigns." } %>
+    </td>
   </tr>
 <% end %>
 </tbody>
 </table>
+
+<%= will_paginate @clients %>

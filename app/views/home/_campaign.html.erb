@@ -1,0 +1,20 @@
+<% if days_action <= 0 %>
+	<tr class='warning'>
+	<% days_display = days_action.abs.to_s << " day".pluralize(days_action.abs) << " left" %>
+<% else %>
+	<tr class='error'>
+	<% days_display = days_action.to_s << " day".pluralize(days_action) << " late" %>
+<% end %>
+
+	<td><%= campaign.id %></td>
+	<td><%= days_display %></td>
+	<td><%= campaign.client.name %> (<%= campaign.client.company %>)</td>
+	<td><%= campaign.url.url %></td>
+	<td><%= campaign.keyphrase.keyphrase %></td>
+	<td><%= campaign.ttype %></td>
+	<td><%= campaign.ctype %></td>
+	<td><%= l campaign.start %></td>
+	<!--<td><%= campaign.length %></td>
+	<td><%= campaign.autoemails %></td>-->
+  <td><%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_campaign_path(campaign), :class => 'btn btn-mini' %></td>
+</tr>

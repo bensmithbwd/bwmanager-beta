@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  keyphrase: MyString
+  links: MyText
+
+two:
+  keyphrase: MyString
+  links: MyText

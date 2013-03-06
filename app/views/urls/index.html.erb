@@ -1,0 +1,31 @@
+<%= search_form_for(@q, :html => {:class => 'form-inline' }) do |f| %>
+  <div class="pull-right">
+    <%= f.text_field :url_cont, :class => 'span2 search-query', :placeholder => 'Search...' %>
+    <%= link_to ("<p class='text-right'><br><i class='icon-remove'></i> Remove Filters</p>").html_safe, urls_path if params[:q] %>
+  </div>
+<% end %>
+
+<div class="page-header">
+  <h1>URLs <small>You're entering <em>our</em> domain now</small></h1>
+</div>
+
+<table class='table table-condensed table-striped'>
+  <tr>
+  	<th><%= sort_link @q, :id, "#" %></th>
+    <th><%= sort_link @q, :url, "URL" %></th>
+    <th class='span2'></th>
+  </tr>
+
+<% @urls.each do |url| %>
+  <tr>
+    <td><%= url.id %></td>
+    <td><%= url.url %></td>
+    <td>
+    	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_url_path(url), :class => 'btn btn-mini' %>
+    	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, url, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you want to DELETE URL [#{url.id}]?" } %>
+  	</td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @campaigns %>

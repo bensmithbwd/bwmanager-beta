@@ -1,0 +1,2 @@
+$('#new_keyphrase_modal').modal('hide');
+$('.keyphrase_id_ajax').prepend($("<option selected='selected'></option>").attr("value","<%= @keyphrase.id %>").text("<%= escape_javascript(@keyphrase.keyphrase) %>"));

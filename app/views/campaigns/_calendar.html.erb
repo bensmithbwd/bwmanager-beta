@@ -1,0 +1,11 @@
+<hr>
+
+<div class='calendar-wrap'>
+	<p class='pull-right text-right'><span class="label label-info">GEN</span> <span class="label label-important">T1</span> <span class="label label-success">T2</span><br><span class="label label-warning">Link Indexing</span></p>
+	<%= calendar campaign_dates, {:start_day => :monday, :prev_text => ("<i class='icon-backward'></i>").html_safe, :next_text => ("<i class='icon-forward'></i>").html_safe} do |c| %>
+	  <% if c.ttype == "T2" %><span class="badge badge-success"><%= c.total %></span><% end %>
+	  <% if c.ttype == "GEN" %><span class="badge badge-info"><%= c.total %></span><% end %>
+		<% if c.ttype == "T1" %><span class="badge badge-important"><%= c.total %></span><% end %>
+	  <% if (c.ttype).to_s.length > 3 %><br><span class="badge badge-warning"><%= c.total %></span><% end %>
+	<% end %>
+</div>

@@ -1,8 +1,8 @@
-class HomeController < ApplicationController
+class HomeController < ApplicationController  
   def index
-    @danger_campaigns = Campaign.where("date_add(start, interval length day) <= ?", Date.today).order("start ASC")
-    @warning_campaigns = Campaign.where("date_add(start, interval length day) > ? and date_add(start, interval length day) <= ?", Date.today, 5.days.from_now).order("start ASC")
+    @campaigns = Campaign.where("DATE_ADD(start, INTERVAL length DAY) <= ? AND complete = 0", 10.days.from_now).order("start ASC")
+    @link_indexes = Campaign.where("links_index <= ?", 10.days.from_now).order("links_index ASC")
     
-    @sql_debug = "@danger_campaigns = #{@danger_campaigns.to_sql}\r\n\r\n@warning_campaigns = #{@warning_campaigns.to_sql}"
+    #@sql_debug = "@campaigns = " << @campaigns.to_sql << "\n\n" << "@link_indexes = " << @link_indexes.to_sql
   end
 end

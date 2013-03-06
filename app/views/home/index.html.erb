@@ -1,47 +1,33 @@
-<div class="pull-right">
-	<%= link_to 'New Client', new_client_path, :class => 'btn' %>
-	<%= link_to 'New Campaign', new_campaign_path, :class => 'btn' %>
+<div class="page-header">
+  <h1>Home <small>I'm lycan what you've done to the place</small></h1>
 </div>
 
-<h3>Campaigns</h3>
-<pre><%= @sql_debug %></pre>
-<table class='table table-condensed table-striped'>
-<thead>
-  <tr>
-  	<th>Action Date</th>
-    <th>Client</th>
-    <th>Url</th>
-    <th>Keyphrase</th>
-    <th>Type</th>
-    <th>Start</th>
-    <th>Length</th>
-    <th>Autoemails</th>
-  </tr>
-</thead>
-<tbody>
-<% @danger_campaigns.each do |campaign| %>
-  <tr class='error'>
-  	<td><%= campaign.start + campaign.length.days %></td>
-    <td><%= campaign.client.name %> (<%= campaign.client.company %>)</td>
-    <td><%= campaign.url %></td>
-    <td><%= campaign.keyphrase %></td>
-    <td><%= campaign.ctype %></td>
-    <td><%= campaign.start %></td>
-    <td><%= campaign.length %></td>
-    <td><%= campaign.autoemails %></td>
-  </tr>
+<% if user_signed_in? %>
+	<h4>Campaign Actions</h4>	
+	<table class='table table-condensed table-striped table-hover'>
+	<%= render 'campaign_thead' %>
+	<tbody>
+		<% @campaigns.each do |campaign| %>
+		  <% days_action = (Time.now.minus_with_coercion((campaign.start + campaign.length.days).to_time)/86400).round %>
+		  <%= render 'campaign', :campaign => campaign, :days_action => days_action %>
+		<% end %>
+	</tbody>
+	</table>
+	
+	<hr>
+	
+	<h4>Link Index Actions</h4>	
+	<table class='table table-condensed table-striped table-hover'>
+	<%= render 'campaign_thead' %>
+	<tbody>
+		<% @link_indexes.each do |campaign| %>
+		  <% days_action = (Time.now.minus_with_coercion((campaign.links_index).to_time)/86400).round %>
+		  <%= render 'campaign', :campaign => campaign, :days_action => days_action %>
+		<% end %>
+	</tbody>
+	</table>
+	
+	<!--<pre><%= @sql_debug %></pre>-->
+<% else %>	
+	<p>Please <%= link_to 'Log in', new_user_session_path %> or <%= link_to 'Sign up', new_user_registration_path %> to continue.</p>
 <% end %>
-<% @warning_campaigns.each do |campaign| %>
-  <tr class='warning'>
-  	<td><%= campaign.start + campaign.length.days %></td>
-    <td><%= campaign.client.name %> (<%= campaign.client.company %>)</td>
-    <td><%= campaign.url %></td>
-    <td><%= campaign.keyphrase %></td>
-    <td><%= campaign.ctype %></td>
-    <td><%= campaign.start %></td>
-    <td><%= campaign.length %></td>
-    <td><%= campaign.autoemails %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>

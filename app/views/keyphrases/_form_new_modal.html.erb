@@ -1,0 +1,19 @@
+<div id="new_keyphrase_modal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+<%= simple_form_for(Keyphrase.new, :html => {:class => 'form-horizontal'}, :remote => true, :validate => true) do |f| %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">New Keyphrase</h3>    
+  </div>
+  <div class="modal-body">
+		<%= f.error_notification %>
+	  <div class="form-inputs">
+	    <%= f.input :keyphrase, :input_html => {:class => 'url_id_ajax' } %>
+	  </div>
+  </div>
+  <div class="modal-footer">
+    	<%= f.button :submit, :class => 'btn btn-primary pull-left' %>
+    	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    	<button type='button' class='btn btn-mini btn-success' data-toggle='modal' data-target='#new_url_modal'><i class='icon-plus icon-white'></i> TEST</button>
+  </div>
+<% end %>
+</div>

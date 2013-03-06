@@ -6,6 +6,12 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     end
+    
+    # just a quick note to explain how sub access works for future ref
+    if user.has_role? :xxx
+      can :manage, Campaign
+    end
+    
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

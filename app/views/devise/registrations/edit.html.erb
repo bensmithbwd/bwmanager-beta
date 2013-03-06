@@ -1,4 +1,7 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="page-header">
+  <h1>Edit account <small>Transform yourself*</small></h1>
+</div>
+
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
   <%= display_base_errors resource %>
@@ -10,5 +13,6 @@
   <%= f.button :submit, 'Update', :class => 'btn-primary' %>
 <% end %>
 <h3>Cancel my account</h3>
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
-<%= link_to "Back", :back %>
+<p>Unhappy? <%= link_to "Leave the pack", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+<hr>
+<p class='muted'><small>* Full moon not required</small></p>

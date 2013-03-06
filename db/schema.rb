@@ -11,21 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130226231210) do
+ActiveRecord::Schema.define(:version => 20130306185431) do
 
   create_table "campaigns", :force => true do |t|
     t.integer  "client_id"
-    t.string   "url"
-    t.string   "keyphrase"
+    t.integer  "url_id"
+    t.integer  "keyphrase_id"
+    t.string   "ttype"
     t.string   "ctype"
     t.date     "start"
-    t.integer  "length",     :default => 30
-    t.integer  "autoemails", :default => 3
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.integer  "length",       :default => 30
+    t.integer  "autoemails",   :default => 3
+    t.text     "links"
+    t.boolean  "complete"
+    t.date     "links_index"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   add_index "campaigns", ["client_id"], :name => "index_campaigns_on_client_id"
+  add_index "campaigns", ["keyphrase_id"], :name => "index_campaigns_on_keyphrase_id"
+  add_index "campaigns", ["url_id"], :name => "index_campaigns_on_url_id"
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -40,6 +46,12 @@ ActiveRecord::Schema.define(:version => 20130226231210) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "keyphrases", :force => true do |t|
+    t.string   "keyphrase"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -50,6 +62,21 @@ ActiveRecord::Schema.define(:version => 20130226231210) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "t1links", :force => true do |t|
+    t.integer  "keyphrase_id"
+    t.text     "links"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "t1links", ["keyphrase_id"], :name => "index_t1links_on_keyphrase_id"
+
+  create_table "urls", :force => true do |t|
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

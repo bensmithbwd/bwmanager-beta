@@ -1,0 +1,37 @@
+<%= search_form_for(@q, :html => {:class => 'form-inline' }) do |f| %>
+  <div class="pull-right">
+    <%= f.text_field :keyphrase_keyphrase_cont, :class => 'span2 search-query', :placeholder => 'Search...' %>
+    <%= link_to ("<p class='text-right'><br><i class='icon-remove'></i> Remove Filters</p>").html_safe, t1links_path if params[:q] %>
+  </div>
+<% end %>
+
+<div class="page-header">
+  <h1>Tier 1 Links <small>I think the tier 2 links loop us around to the tier 1 links</small></h1>
+</div>
+
+
+<table class='table table-condensed table-striped'>
+  <thead>
+    <tr>
+    	<th><%= sort_link @q, :id, "#" %></th>
+    	<th><%= sort_link @q, :keyphrase_keyphrase, "Keyphrase" %></th>
+    	<th class='span2'></th>
+  	</tr>
+	</thead>
+	<tbody>
+		<% @t1links.each do |t1link| %>
+		  <tr>
+		    <td><%= t1link.id %></td>
+		    <td><%= t1link.keyphrase.keyphrase %></td>
+		    <td>
+		    	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_t1link_path(t1link), :class => 'btn btn-mini' %>
+		    	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, t1link, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you wish to delete the Tier 1 Links for '#{t1link.keyphrase}'." } %>
+		    </td>
+		  </tr>
+		<% end %>
+	</tbody>
+</table>
+
+<br />
+
+<%= will_paginate @t1links %>

@@ -1,39 +1,55 @@
-<div class="pull-right">
-	<%= link_to 'New Client', new_client_path, :class => 'btn' %>
-	<%= link_to 'New Campaign', new_campaign_path, :class => 'btn' %>
-</div>
+<%= search_form_for(@q, :html => {:class => 'form-inline' }) do |f| %>
+  <div class="pull-right">
+    <%= f.text_field :client_name_or_client_company_or_url_url_or_keyphrase_keyphrase_or_ctype_cont, :class => 'span2 search-query', :placeholder => 'Search...' %>
+    <%= link_to ("<p class='text-right'><br><i class='icon-remove'></i> Remove Filters</p>").html_safe, campaigns_path if params[:q] %>
+  </div>
+<% end %>
 
-<h3>Campaigns</h3>
+<div class="page-header">
+  <h1>Campaigns <small>Hunt and devour your prey</small></h1>
+</div>
 
 <table class='table table-condensed table-striped'>
 <thead>
   <tr>
-    <th>Client</th>
-    <th>Url</th>
-    <th>Keyphrase</th>
-    <th>Type</th>
-    <th>Start</th>
-    <th>Length</th>
-    <th>Autoemails</th>
-    <th></th>
-    <th></th>
+    <th><%= sort_link @q, :id, "#" %></th>
+    <th><%= sort_link @q, :client_name, "Client (Company)" %></th>
+    <th><%= sort_link @q, :url_url, "URL" %></th>
+    <th><%= sort_link @q, :keyphrase_keyphrase, "Keyphrase" %></th>
+    <th><%= sort_link @q, :ttype, "Type" %></th>
+    <th><%= sort_link @q, :ctype, "Template" %></th>
+    <th><%= sort_link @q, :start, "Start" %></th>
+    <th>End</th>
+    <!--<th><%= sort_link @q, :length, "Length" %></th>
+    <th><%= sort_link @q, :autoemails, "Autoemails" %></th>-->
+    <th><%= sort_link @q, :complete, "Complete" %></th>
+    <th><%= sort_link @q, :links_index, "Links Index" %></th>
     <th></th>
   </tr>
 </thead>
 <tbody>
 <% @campaigns.each do |campaign| %>
   <tr>
+    <td><%= campaign.id %></td>
     <td><%= campaign.client.name %> (<%= campaign.client.company %>)</td>
-    <td><%= campaign.url %></td>
-    <td><%= campaign.keyphrase %></td>
+    <td><%= campaign.url.url %></td>
+    <td><%= campaign.keyphrase.keyphrase %></td>
+    <td><%= campaign.ttype %></td>
     <td><%= campaign.ctype %></td>
-    <td><%= campaign.start %></td>
-    <td><%= campaign.length %></td>
-    <td><%= campaign.autoemails %></td>
-    <td><%= link_to 'Show', campaign, :class => 'btn btn-mini' %></td>
-    <td><%= link_to 'Edit', edit_campaign_path(campaign), :class => 'btn btn-mini' %></td>
-    <td><%= link_to 'Destroy', campaign, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
+    <td><%= l campaign.start %></td>
+    <td><%= l campaign.start + campaign.length.days %></td>
+    <!--<td><%= campaign.length %></td>
+    <td><%= campaign.autoemails %></td>-->
+    <td><%= ("<i class='icon-ok'></i>").html_safe if campaign.complete == true %></td>
+    <td><%= l campaign.links_index if campaign.links_index %></td>
+    <td>
+    	<%= link_to ("<i class='icon-retweet icon-white'></i>").html_safe, duplicate_campaign_path(campaign), :class => 'btn btn-mini btn-success', data: { confirm: "Are you sure you want to DUPLICATE Campaign [#{campaign.id}]?" } %>
+    	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_campaign_path(campaign), :class => 'btn btn-mini' %>
+    	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, campaign, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you want to DELETE Campaign [#{campaign.id}]?" } %>
+  	</td>
   </tr>
 <% end %>
 </tbody>
 </table>
+
+<%= will_paginate @campaigns %>

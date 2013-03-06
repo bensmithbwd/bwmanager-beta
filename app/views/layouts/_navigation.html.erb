@@ -1,21 +1,55 @@
-<%= link_to "BWM", root_path, :class => 'brand' %>
+<%= link_to ("BLACKWOLF<span>MANAGER</span>").html_safe, root_path, :class => 'brand' %>
 
-<ul class="nav pull-right">
+<div class="btn-group pull-right">
 	<% if user_signed_in? %>
-		<li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+	  <%= link_to ("<i class='icon-user icon-white'></i> ").html_safe << current_user.name, edit_user_registration_path, :class => "btn btn-primary" %>
+	  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+	  <ul class="dropdown-menu">
+	    <li class="<%= 'active' if current_page?(edit_user_registration_path) %>"><%= link_to 'Edit account', edit_user_registration_path %></li>
+	    <li class="divider"></li>
+	    <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+	  </ul>
 	<% else %>
-		<li class="<%= 'active' if current_page?(new_user_session_path) %>"><%= link_to 'Login', new_user_session_path %></li>
+	  <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> Not logged in</a>
+	  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+	  <ul class="dropdown-menu">
+		<li class="<%= 'active' if current_page?(new_user_session_path) %>"><%= link_to 'Log in', new_user_session_path %></li>
+	    <li class="divider"></li>
+	    <li class="<%= 'active' if current_page?(new_user_registration_path) %>"><%= link_to 'Sign up', new_user_registration_path %></li>
+	  </ul>
 	<% end %>
-</ul>
-  
+</div>
+
 <ul class="nav">
+	<li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
 	<% if user_signed_in? %>
-		<li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
-		<li class="<%= 'active' if current_page?(edit_user_registration_path) %>"><%= link_to 'Edit account', edit_user_registration_path %></li>
 		<% if current_user.has_role? :admin %>
-	  		<li class="<%= 'active' if params[:controller] == 'users' %>"><%= link_to 'Manage Users', users_path %></li>
-	  		<li class="<%= 'active' if params[:controller] == 'clients' %>"><%= link_to 'Manage Clients', clients_path %></li>
-	  		<li class="<%= 'active' if params[:controller] == 'campaigns' %>"><%= link_to 'Manage Campaigns', campaigns_path %></li>
+				<li class="<%= 'active' if params[:controller] == 'clients' %> dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Clients <b class="caret"></b></a>
+	  			<ul class="dropdown-menu">
+	  				<li class="<%= 'active' if current_page?(clients_path) %>"><%= link_to 'Manage clients', clients_path %></li>
+	  				<li class="<%= 'active' if current_page?(new_client_path) %>"><%= link_to 'Add new client', new_client_path %></li>
+	  			</ul>
+	  		<li class="<%= 'active' if params[:controller] == 'campaigns' %> dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Campaigns <b class="caret"></b></a>
+	  		<ul class="dropdown-menu">
+	  			<li class="<%= 'active' if current_page?(campaigns_path) %>"><%= link_to 'Manage campaigns', campaigns_path %></li>
+	  			<li class="<%= 'active' if current_page?(new_campaign_path) %>"><%= link_to 'Add new campaign', new_campaign_path %></li>
+	  		</ul>
+	  		<li class="<%= 'active' if params[:controller] == 'urls' %> dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">URLs <b class="caret"></b></a>
+	  		<ul class="dropdown-menu">
+	  			<li class="<%= 'active' if current_page?(urls_path) %>"><%= link_to 'Manage URLs', urls_path %></li>
+	  			<li class="<%= 'active' if current_page?(new_url_path) %>"><%= link_to 'Add new URL', new_url_path %></li>
+	  		</ul>
+	  		<li class="<%= 'active' if params[:controller] == 'keyphrases' %> dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Keyphrases <b class="caret"></b></a>
+	  		<ul class="dropdown-menu">
+	  			<li class="<%= 'active' if current_page?(keyphrases_path) %>"><%= link_to 'Manage keyphrases', keyphrases_path %></li>
+	  			<li class="<%= 'active' if current_page?(new_keyphrase_path) %>"><%= link_to 'Add new keyphrase', new_keyphrase_path %></li>
+	  		</ul>
+	  		<li class="<%= 'active' if params[:controller] == 't1links' %> dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">T1 links <b class="caret"></b></a>
+	  		<ul class="dropdown-menu">
+	  			<li class="<%= 'active' if current_page?(t1links_path) %>"><%= link_to 'Manage T1 links', t1links_path %></li>
+	  			<li class="<%= 'active' if current_page?(new_t1link_path) %>"><%= link_to 'Add new T1 links', new_t1link_path %></li>
+	  		</ul>
+	  		<!--<li class="<%= 'active' if params[:controller] == 'users' %>"><%= link_to 'Users', users_path %></li>-->
 		<% end %>
 	<% else %>
 		<li class="<%= 'active' if current_page?(new_user_registration_path) %>"><%= link_to 'Sign up', new_user_registration_path %></li>

@@ -4,13 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Bwmanager" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Bwmanager" %>">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <nav class="navbar-inner">
         <div class="container">
           <%= render 'layouts/navigation' %>
@@ -31,5 +32,8 @@
         </div>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
+    <%= render "clients/form_new_modal" %>
+    <%= render "urls/form_new_modal" %>
+    <%= render "keyphrases/form_new_modal" %>
   </body>
 </html>
