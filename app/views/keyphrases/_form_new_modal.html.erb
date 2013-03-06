@@ -7,13 +7,12 @@
   <div class="modal-body">
 		<%= f.error_notification %>
 	  <div class="form-inputs">
-	    <%= f.input :keyphrase, :input_html => {:class => 'url_id_ajax' } %>
+	    <%= f.input :keyphrase %>
 	  </div>
   </div>
   <div class="modal-footer">
     	<%= f.button :submit, :class => 'btn btn-primary pull-left' %>
     	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-    	<button type='button' class='btn btn-mini btn-success' data-toggle='modal' data-target='#new_url_modal'><i class='icon-plus icon-white'></i> TEST</button>
   </div>
 <% end %>
 </div>
