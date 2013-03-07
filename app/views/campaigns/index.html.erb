@@ -16,8 +16,8 @@
     <th><%= sort_link @q, :client_name, "Client (Company)" %></th>
     <th><%= sort_link @q, :url_url, "URL" %></th>
     <th><%= sort_link @q, :keyphrase_keyphrase, "Keyphrase" %></th>
-    <th><%= sort_link @q, :ttype, "Type" %></th>
-    <th><%= sort_link @q, :ctype, "Template" %></th>
+    <th><%= sort_link @q, :ctype, "Type" %></th>
+    <th><%= sort_link @q, :ttype, "Template" %></th>
     <th><%= sort_link @q, :start, "Start" %></th>
     <th><%= sort_link @q, :end, "End" %></th>
     <!--<th><%= sort_link @q, :length, "Length" %></th>
@@ -34,8 +34,8 @@
     <td><%= campaign.client.name %> (<%= campaign.client.company %>)</td>
     <td><%= campaign.url.url %></td>
     <td><%= campaign.keyphrase.keyphrase %></td>
-    <td><%= campaign.ttype %></td>
     <td><%= campaign.ctype %></td>
+    <td><%= campaign.ttype %></td>
     <td><%= l campaign.start %></td>
     <td><%= l campaign.end %></td>
     <!--<td><%= campaign.length %></td>

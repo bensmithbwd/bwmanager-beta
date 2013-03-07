@@ -13,11 +13,11 @@
   </div>  	
   </div>
   <div class="span6">
-    <%= f.input :ttype, :input_html => {:class => 'span2' }, collection: ["T1","T2","GEN"], prompt: "Select..." %>
-    <%= f.input :ctype, :input_html => {:class => 'span2' }, collection: ["2LT","2TAM","2TFM","2TSNP","3TSN","4SN","5TP","8PN","8SN","CAB","FM","SWM"], prompt: "Select..." %>
+    <%= f.input :ctype, :input_html => {:class => 'span2' }, collection: ["T1","T2","GEN"], prompt: "Select..." %>
+    <%= f.input :ttype, :input_html => {:class => 'span2' }, collection: ["X1 2 T Content","X1 2 T Forum Profile","X1 2 T Web Profile","X1 4 Way All Modules","X1 Profile","X1 Single SN","X1 Single T FM","X3 2 T All Modules","X3 2 T FM","X3 2 T SNP","X3 3 T SN","X3 3 T Web Profile","X3 3 Way SN","X3 Profile","X3 Web Profile","X8 Profile","X8 SB","X8 Web Profile"], prompt: "Select..." %>
     <%= f.input :links, :input_html => { :rows => 3, :class => 'span4' } if params[:action] != 'new' %>
     <%= f.input :complete if params[:action] != 'new' %>
-    <%= f.input :links_index, :input_html => {:class => 'span1' }, order: [:day, :month, :year], prompt: "" if params[:action] != 'new' %>  	
+    <%= f.input :links_index, :input_html => {:class => 'span1' }, order: [:day, :month, :year], prompt: "" if params[:action] != 'new' %>
   </div>
 </div>
 

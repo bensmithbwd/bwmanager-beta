@@ -4,8 +4,8 @@ class Campaign < ActiveRecord::Base
   belongs_to :keyphrase
   attr_accessible :autoemails, :complete, :ctype, :length, :links, :links_index, :start, :ttype, :keyphrase_id, :url_id, :client_id
   
-  scope :ttype_dates, select("COUNT(id) AS total, ttype, start AS start_time").where("start != ''").group(:start,:ttype)
-  scope :links_index_dates, select("COUNT(id) AS total, links_index AS ttype, links_index AS start_time").where("links_index != ''").group(:links_index)
+  scope :ttype_dates, select("COUNT(id) AS total, ctype, start AS start_time").where("start != ''").group(:start,:ctype)
+  scope :links_index_dates, select("COUNT(id) AS total, links_index AS ctype, links_index AS start_time").where("links_index != ''").group(:links_index)
   
   ransacker :end do |r|
      Arel::Nodes::SqlLiteral.new("DATE_ADD(`campaigns`.`start`, INTERVAL `campaigns`.`length` DAY)")
