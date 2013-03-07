@@ -7,6 +7,22 @@ class Campaign < ActiveRecord::Base
   scope :ttype_dates, select("COUNT(id) AS total, ttype, start AS start_time").where("start != ''").group(:start,:ttype)
   scope :links_index_dates, select("COUNT(id) AS total, links_index AS ttype, links_index AS start_time").where("links_index != ''").group(:links_index)
   
+  ransacker :end do |r|
+     Arel::Nodes::SqlLiteral.new("DATE_ADD(`campaigns`.`start`, INTERVAL `campaigns`.`length` DAY)")
+  end
+  
+  def end
+    start + length.days
+  end
+  
+  def days_action_campaign_end
+    (Time.now.minus_with_coercion((start + length.days).to_time)/86400).round
+  end
+  
+  def days_action_links_index
+    (Time.now.minus_with_coercion((links_index).to_time)/86400).round
+  end
+  
   validates :client_id, :presence => true
   validates :url_id, :presence => true
   validates :keyphrase, :presence => true

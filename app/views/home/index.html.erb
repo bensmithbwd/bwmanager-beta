@@ -3,13 +3,13 @@
 </div>
 
 <% if user_signed_in? %>
+	<% if current_user.has_role? :admin %>
 	<h4>Campaign Actions</h4>	
 	<table class='table table-condensed table-striped table-hover'>
 	<%= render 'campaign_thead' %>
 	<tbody>
 		<% @campaigns.each do |campaign| %>
-		  <% days_action = (Time.now.minus_with_coercion((campaign.start + campaign.length.days).to_time)/86400).round %>
-		  <%= render 'campaign', :campaign => campaign, :days_action => days_action %>
+		  <%= render 'campaign', :campaign => campaign, :days_action => campaign.days_action_campaign_end %>
 		<% end %>
 	</tbody>
 	</table>
@@ -21,13 +21,15 @@
 	<%= render 'campaign_thead' %>
 	<tbody>
 		<% @link_indexes.each do |campaign| %>
-		  <% days_action = (Time.now.minus_with_coercion((campaign.links_index).to_time)/86400).round %>
-		  <%= render 'campaign', :campaign => campaign, :days_action => days_action %>
+		  <%= render 'campaign', :campaign => campaign, :days_action => campaign.days_action_links_index %>
 		<% end %>
 	</tbody>
 	</table>
 	
 	<!--<pre><%= @sql_debug %></pre>-->
+	<% else %>
+		<p>Thank you for signing up. As an extra security measure we check all accounts before giving you full access to the system. Please give us a call on XXXXX XXX XXX to confirm your account with us and we will assign you the appropriate permissions.</p>
+	<% end %>
 <% else %>	
 	<p>Please <%= link_to 'Log in', new_user_session_path %> or <%= link_to 'Sign up', new_user_registration_path %> to continue.</p>
 <% end %>

@@ -1,3 +1,4 @@
 $('#new_keyphrase_modal').modal('hide');
 $('#new_keyphrase')[0].reset();
 $('.keyphrase_id_ajax').prepend($("<option selected='selected'></option>").attr("value","<%= @keyphrase.id %>").text("<%= escape_javascript(@keyphrase.keyphrase) %>"));
+$("#flash_notice_ajax").prepend("<div class='alert alert-success'><a class='close' data-dismiss='alert'>×</a><div id='flash_notice'>Keyphrase [<%= escape_javascript(@keyphrase.keyphrase) %>] was successfully created.</div></div>");

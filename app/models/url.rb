@@ -4,5 +4,5 @@ class Url < ActiveRecord::Base
   has_many :keyphrases, :through => :campaigns
   attr_accessible :url
   
-  validates :url, :presence => true
+  validates :url, :presence => true, :uniqueness => true
 end

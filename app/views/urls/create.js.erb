@@ -1,3 +1,4 @@
 $('#new_url_modal').modal('hide');
 $('#new_url')[0].reset();
 $('.url_id_ajax').prepend($("<option selected='selected'></option>").attr("value","<%= @url.id %>").text("<%= escape_javascript(@url.url) %>"));
+$("#flash_notice_ajax").prepend("<div class='alert alert-success'><a class='close' data-dismiss='alert'>×</a><div id='flash_notice'>Url [<%= escape_javascript(@url.url) %>] was successfully created.</div></div>");

@@ -8,6 +8,7 @@ class ClientsController < ApplicationController
 
   def show
     @client = Client.find(params[:id])
+    @campaigns = Campaign.find(@client.campaign_ids)
   end
 
   def new

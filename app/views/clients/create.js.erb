@@ -1,3 +1,4 @@
 $('#new_client_modal').modal('hide');
 $('#new_client')[0].reset();
 $('.client_id_ajax').prepend($("<option selected='selected'></option>").attr("value","<%= @client.id %>").text("<%= escape_javascript(@client.name) << " (".html_safe << escape_javascript(@client.company) << ")".html_safe %>"));
+$("#flash_notice_ajax").prepend("<div class='alert alert-success'><a class='close' data-dismiss='alert'>×</a><div id='flash_notice'>Client [<%= escape_javascript(@client.name) << " (".html_safe << escape_javascript(@client.company) << ")".html_safe %>] was successfully created.</div></div>");

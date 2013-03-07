@@ -9,7 +9,7 @@
   <h1>Clients <small>I'd like to take this opportunity to introduce the pack</small></h1>
 </div>
 
-<table class='table table-condensed table-striped'>
+<table class='table table-condensed table-striped table-hover'>
   <thead>
   	<tr>
     	<th><%= sort_link @q, :id, "#" %></th>
@@ -17,9 +17,9 @@
     	<th><%= sort_link @q, :company, "Company" %></th>
     	<th><%= sort_link @q, :phone1, "Phone1" %></th>
     	<th><%= sort_link @q, :phone2, "Phone2" %></th>
-    	<th><%= sort_link @q, :phone3, "Phone3" %></th>
+    	<!--<th><%= sort_link @q, :phone3, "Phone3" %></th>-->
     	<th><%= sort_link @q, :email, "Email" %></th>
-    	<th><%= sort_link @q, :address, "Address" %></th>
+    	<!--<th><%= sort_link @q, :address, "Address" %></th>-->
     	<th><%= sort_link @q, :leadsource, "Leadsource" %></th>
 	    <th></th>
 	  </tr>
@@ -32,9 +32,9 @@
     <td><%= client.company %></td>
     <td><%= client.phone1 %></td>
     <td><%= client.phone2 %></td>
-    <td><%= client.phone3 %></td>
+    <!--<td><%= client.phone3 %></td>-->
     <td><%= client.email %></td>
-    <td><%= client.address %></td>
+    <!--<td><%= client.address %></td>-->
     <td><%= client.leadsource %></td>
     <td>
     	<%= link_to ("<i class='icon-search icon-white'></i>").html_safe, client, :class => 'btn btn-mini btn-info' %>

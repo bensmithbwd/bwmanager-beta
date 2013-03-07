@@ -37,3 +37,37 @@
   <b>Leadsource:</b>
   <%= @client.leadsource %>
 </p>
+
+<hr>
+
+<h4>Campaigns</h4>	
+<table class='table table-condensed table-striped table-hover'>
+<thead>
+  <tr>
+  	<td><small>#</small></td>
+    <td><small>Url</small></td>
+    <td><small>Keyphrase</small></td>
+    <td><small>Type</small></td>
+    <td><small>Template</small></td>
+    <td><small>Start</small></td>
+    <!--<td><small>Length</small></td>
+    <td><small>Autoemails</small></td>-->
+    <td></td>
+  </tr>
+</thead>
+<tbody>
+	<% @campaigns.each do |campaign| %>
+		<tr>
+			<td><%= campaign.id %></td>
+			<td><%= campaign.url.url %></td>
+			<td><%= campaign.keyphrase.keyphrase %></td>
+			<td><%= campaign.ttype %></td>
+			<td><%= campaign.ctype %></td>
+			<td><%= l campaign.start %></td>
+			<!--<td><%= campaign.length %></td>
+			<td><%= campaign.autoemails %></td>-->
+		  <td><%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_campaign_path(campaign), :class => 'btn btn-mini' %></td>
+		</tr>
+	<% end %>
+</tbody>
+</table>

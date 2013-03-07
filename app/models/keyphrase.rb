@@ -5,6 +5,6 @@ class Keyphrase < ActiveRecord::Base
   has_many :urls, :through => :campaigns
   attr_accessible :keyphrase
 
-  validates :keyphrase, :presence => true
+  validates :keyphrase, :presence => true, :uniqueness => true
   validates_format_of :keyphrase, :with => /\A[\w\s]+\Z/i
 end
