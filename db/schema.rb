@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306185431) do
+ActiveRecord::Schema.define(:version => 20130312035756) do
 
   create_table "campaigns", :force => true do |t|
     t.integer  "client_id"
@@ -62,6 +62,29 @@ ActiveRecord::Schema.define(:version => 20130306185431) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "sale_lines", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.decimal  "amount",      :precision => 10, :scale => 0
+    t.integer  "quantity"
+    t.boolean  "optional"
+    t.integer  "sale_id"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
+
+  add_index "sale_lines", ["sale_id"], :name => "index_sale_lines_on_sale_id"
+
+  create_table "sales", :force => true do |t|
+    t.date     "quote"
+    t.date     "invoice"
+    t.integer  "client_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sales", ["client_id"], :name => "index_sales_on_client_id"
 
   create_table "t1links", :force => true do |t|
     t.integer  "keyphrase_id"

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @sale_line.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @sale_line.description %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @sale_line.amount %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @sale_line.quantity %>
+</p>
+
+<p>
+  <b>Optional:</b>
+  <%= @sale_line.optional %>
+</p>
+
+<p>
+  <b>Sale:</b>
+  <%= @sale_line.sale %>
+</p>
+
+
+<%= link_to 'Edit', edit_sale_line_path(@sale_line) %> |
+<%= link_to 'Back', sale_lines_path %>

@@ -4,9 +4,9 @@
 <div class="row">
   <div class="span6">
   <div class="form-inputs">
-    <%= f.association :client, label_method: lambda { |client| "#{client.name} (#{client.company})" }, :input_html => {:class => 'client_id_ajax' } %>
-    <%= f.association :url, label_method: :url, :input_html => {:class => 'url_id_ajax' } %>
-    <%= f.association :keyphrase, label_method: :keyphrase, :input_html => {:class => 'keyphrase_id_ajax' } %>
+    <%= f.association :client, :collection => Client.order("name,company ASC"), label_method: lambda { |client| "#{client.name} (#{client.company})" }, :input_html => {:class => 'client_id_ajax' } %>
+    <%= f.association :url, :collection => Url.order("url ASC"), label_method: :url, :input_html => {:class => 'url_id_ajax' } %>
+    <%= f.association :keyphrase, :collection => Keyphrase.order("keyphrase ASC"), label_method: :keyphrase, :input_html => {:class => 'keyphrase_id_ajax' } %>
     <%= f.input :start, :input_html => {:class => 'span1' }, order: [:day, :month, :year] %>
     <%= f.input :length, :input_html => { :class => 'span1' } %>
     <%= f.input :autoemails, :input_html => { :class => 'span1' } %>

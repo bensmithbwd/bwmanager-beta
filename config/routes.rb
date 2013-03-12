@@ -1,5 +1,11 @@
 Bwmanager::Application.routes.draw do
 
+  resources :sale_lines
+
+
+  resources :sales
+
+
   resources :keyphrases
 
   resources :urls

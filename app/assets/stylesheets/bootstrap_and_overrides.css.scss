@@ -1,3 +1,6 @@
+$sansFontFamily: arial, serif;
+$baseFontSize: 14px;
+
 @import "bootstrap";
 body { padding: 40px 0; background: #ddd }
 @import "bootstrap-responsive";
@@ -19,6 +22,7 @@ body { padding: 40px 0; background: #ddd }
 .pagination {text-align: center}
 
 h1 small {font-size: 16px}
+table {font-size: 12px}
 
 .calendar-wrap h2 {font-size: 15px; font-family: arial, sans-serif; margin-left: -10px}
 .calendar-wrap i {margin: 0 10px}
