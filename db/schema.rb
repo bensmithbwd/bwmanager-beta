@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130312035756) do
+ActiveRecord::Schema.define(:version => 20130312190131) do
 
   create_table "campaigns", :force => true do |t|
     t.integer  "client_id"
@@ -94,6 +94,17 @@ ActiveRecord::Schema.define(:version => 20130312035756) do
   end
 
   add_index "t1links", ["keyphrase_id"], :name => "index_t1links_on_keyphrase_id"
+
+  create_table "transactions", :force => true do |t|
+    t.date     "date"
+    t.string   "description"
+    t.decimal  "debit",       :precision => 10, :scale => 2
+    t.decimal  "credit",      :precision => 10, :scale => 2
+    t.decimal  "balance",     :precision => 10, :scale => 2
+    t.string   "ttype"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
 
   create_table "urls", :force => true do |t|
     t.string   "url"

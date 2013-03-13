@@ -1,0 +1,70 @@
+<%= search_form_for(@q, :html => {:class => 'form-inline' }) do |f| %>
+  <div class="pull-right">
+    <%= f.text_field :description_or_ttype_cont, :class => 'span2 search-query', :placeholder => 'Search...' %>
+    <%= link_to ("<p class='text-right'><br><i class='icon-remove'></i> Remove Filters</p>").html_safe, transactions_path if params[:q] %>
+  </div>
+<% end %>
+
+<div class="page-header">
+  <h1>Transactions <%= link_to 'Add new transaction', new_transaction_path, :class => "btn btn-mini" %></h1>
+</div>
+
+<div style='background:#eee;padding:20px;margin-bottom:20px'>
+	<p><strong>Temp csv upload form</strong></p>
+	<%= form_tag('/transactions/upload', :multipart => true) do %>
+	  <%= file_field_tag :file %>
+	  <%= submit_tag %>
+	<% end %>
+</div>
+
+<div style="background:#ccc;padding:20px;margin-bottom:20px">
+	<p>Sales Turnover: &pound;<%= @credit.total %></p>
+	<p>Cost of Sales: &pound;0.00</p>
+	<p>---</p>
+	<p>Gross Profit: &pound;<%= @credit.total %></p>
+	<p>Admin Expenses: &pound;<%= @debit.total %></p>
+	<p>---</p>
+	<p>Operating Profit: &pound;<%= @credit.total - @debit.total %></p>
+	<p>---</p>
+	<p>Corporation Tax: &pound;<%= (@credit.total - @debit.total) * 0.2 %></p>
+	<p>Profit (Loss) after Tax: &pound;<%= (@credit.total - @debit.total) - ((@credit.total - @debit.total) * 0.2) %></p>
+	<p>---</p>
+	<p>Dividends: &pound;<%= @dividends.total %></p>
+	<p style="font-weight:bold;color:#c00">NEED TO CHECK TRANSACTIONS MARKED AS 'D' ARE ACTUALLY DIVIDENDS AND NOT WAGES (shouldn't make a big difference but it should be correct)</p>
+	<p>---</p>
+	<p>Retained Profit (Loss) for the year: &pound;<%= ((@credit.total - @debit.total) - ((@credit.total - @debit.total) * 0.2)) - @dividends.total %></p>
+</div>
+
+<table class='table table-condensed table-striped table-hover'>
+	<thead>
+	  <tr>
+	  	<th><%= sort_link @q, :id, "#" %></th>
+	    <th><%= sort_link @q, :date, "Date" %></th>
+	    <th><%= sort_link @q, :description, "Description" %></th>
+	    <th><%= sort_link @q, :debit, "Debit" %></th>
+	    <th><%= sort_link @q, :credit, "Credit" %></th>
+	    <th><%= sort_link @q, :ttype, "Type" %></th>
+	    <th><%= sort_link @q, :balance, "Balance" %></th>
+	    <th class='span2'></th>
+	  </tr>
+	</thead>
+	<tbody>
+		<% @transactions.each do |transaction| %>
+		  <tr>
+		    <td><%= transaction.id %></td>
+		    <td><%= transaction.date %></td>
+		    <td><%= transaction.description %></td>
+		    <td><%= transaction.debit %></td>
+		    <td><%= transaction.credit %></td>
+		    <td><%= transaction.ttype %></td>
+		    <td><%= transaction.balance %></td>
+		    <td>
+		    	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_transaction_path(transaction), :class => 'btn btn-mini' %>
+		    	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, transaction, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you want to DELETE Transaction [#{transaction.id}]?" } %>
+		  	</td>
+		  </tr>
+		<% end %>
+	</tbody>
+</table>
+
+<%= will_paginate @campaigns %>

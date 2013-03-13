@@ -10,22 +10,25 @@
 </div>
 
 <table class='table table-condensed table-striped table-hover'>
-  <tr>
-  	<th><%= sort_link @q, :id, "#" %></th>
-    <th><%= sort_link @q, :url, "URL" %></th>
-    <th class='span2'></th>
-  </tr>
-
-<% @urls.each do |url| %>
-  <tr>
-    <td><%= url.id %></td>
-    <td><%= url.url %></td>
-    <td>
-    	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_url_path(url), :class => 'btn btn-mini' %>
-    	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, url, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you want to DELETE URL [#{url.id}]?" } %>
-  	</td>
-  </tr>
-<% end %>
+	<thead>
+  	<tr>
+  		<th><%= sort_link @q, :id, "#" %></th>
+	    <th><%= sort_link @q, :url, "URL" %></th>
+    	<th class='span2'></th>
+  	</tr>
+	</thead>
+	<tbody>
+		<% @urls.each do |url| %>
+		  <tr>
+		    <td><%= url.id %></td>
+		    <td><%= url.url %></td>
+		    <td>
+		    	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_url_path(url), :class => 'btn btn-mini' %>
+		    	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, url, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you want to DELETE URL [#{url.id}]?" } %>
+		  	</td>
+		  </tr>
+		<% end %>
+	</tbody>
 </table>
 
 <%= will_paginate @campaigns %>

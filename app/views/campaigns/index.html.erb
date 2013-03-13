@@ -12,19 +12,19 @@
 <table class='table table-condensed table-striped table-hover'>
 <thead>
   <tr>
-    <th><%= sort_link @q, :id, "#" %></th>
-    <th><%= sort_link @q, :client_name, "Client (Company)" %></th>
+    <th class="span1"><%= sort_link @q, :id, "#" %></th>
+    <th><%= sort_link @q, :client_name, "Client" %></th>
     <th><%= sort_link @q, :url_url, "URL" %></th>
     <th><%= sort_link @q, :keyphrase_keyphrase, "Keyphrase" %></th>
     <th><%= sort_link @q, :ctype, "Type" %></th>
-    <th><%= sort_link @q, :ttype, "Template" %></th>
-    <th><%= sort_link @q, :start, "Start" %></th>
+    <!--<th><%= sort_link @q, :ttype, "Template" %></th>
+    <th><%= sort_link @q, :start, "Start" %></th>-->
     <th><%= sort_link @q, :end, "End" %></th>
     <!--<th><%= sort_link @q, :length, "Length" %></th>
     <th><%= sort_link @q, :autoemails, "Autoemails" %></th>-->
     <th><%= sort_link @q, :complete, "<i class='icon-check'></i>".html_safe %></th>
-    <th><%= sort_link @q, :links_index, "Links Index" %></th>
-    <th></th>
+    <th><%= sort_link @q, :links_index, "Index" %></th>
+    <th class="span2"></th>
   </tr>
 </thead>
 <tbody>
@@ -35,14 +35,14 @@
     <td><%= campaign.url.url %></td>
     <td><%= campaign.keyphrase.keyphrase %></td>
     <td><%= campaign.ctype %></td>
-    <td><%= campaign.ttype %></td>
-    <td><%= l campaign.start %></td>
+    <!--<td><%= campaign.ttype %></td>
+    <td><%= l campaign.start %></td>-->
     <td><%= l campaign.end %></td>
     <!--<td><%= campaign.length %></td>
     <td><%= campaign.autoemails %></td>-->
     <td><%= ("<i class='icon-ok'></i>").html_safe if campaign.complete == true %></td>
     <td><%= l campaign.links_index if campaign.links_index %></td>
-    <td>
+    <td class="text-right">
     	<%= link_to ("<i class='icon-retweet icon-white'></i>").html_safe, duplicate_campaign_path(campaign), :class => 'btn btn-mini btn-success', data: { confirm: "Are you sure you want to DUPLICATE Campaign [#{campaign.id}]?" } %>
     	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_campaign_path(campaign), :class => 'btn btn-mini' %>
     	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, campaign, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you want to DELETE Campaign [#{campaign.id}]?" } %>

@@ -10,22 +10,25 @@
 </div>
 
 <table class='table table-condensed table-striped table-hover'>
-  <tr>
-  	<th><%= sort_link @q, :id, "#" %></th>
-    <th><%= sort_link @q, :keyphrase, "Keyphrase" %></th>
-    <th class='span2'></th>
-  </tr>
-
-<% @keyphrases.each do |keyphrase| %>
-  <tr>
-    <td><%= keyphrase.id %></td>
-    <td><%= keyphrase.keyphrase %></td>
-    <td>
-    	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_keyphrase_path(keyphrase), :class => 'btn btn-mini' %>
-    	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, keyphrase, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you want to DELETE Keyphrase [#{keyphrase.id}]?" } %>
-  	</td>
-  </tr>
-<% end %>
+	<thead>
+	  <tr>
+	  	<th><%= sort_link @q, :id, "#" %></th>
+	    <th><%= sort_link @q, :keyphrase, "Keyphrase" %></th>
+	    <th class='span2'></th>
+	  </tr>
+	</thead>
+	<tbody>
+		<% @keyphrases.each do |keyphrase| %>
+		  <tr>
+		    <td><%= keyphrase.id %></td>
+		    <td><%= keyphrase.keyphrase %></td>
+		    <td>
+		    	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_keyphrase_path(keyphrase), :class => 'btn btn-mini' %>
+		    	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, keyphrase, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you want to DELETE Keyphrase [#{keyphrase.id}]?" } %>
+		  	</td>
+		  </tr>
+		<% end %>
+	</tbody>
 </table>
 
 <%= will_paginate @campaigns %>

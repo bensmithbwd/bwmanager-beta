@@ -37,10 +37,11 @@
 					</ul>
 				</li>
 				
-				<% accounts_dropdown = ['sales'] %>
+				<% accounts_dropdown = ['sales','transactions'] %>
 	  		<li class="<%= 'active' if accounts_dropdown.include?(params[:controller]) %> dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Accounts <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 			  		<li class="<%= 'active' if params[:controller] == 'sales' %>"><%= link_to 'Sales', sales_path %></li>
+			  		<li class="<%= 'active' if params[:controller] == 'transactions' %>"><%= link_to 'Transactions', transactions_path %></li>
 			  	</ul>
 			  </li>
 			  
