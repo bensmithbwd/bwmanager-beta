@@ -7,7 +7,7 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    redirect_to campaigns_path
+    redirect_to campaigns_path(:params => {'q[s]' => "id desc"})
   end
   
   def new
@@ -23,7 +23,7 @@ class CampaignsController < ApplicationController
   def create
     @campaign = Campaign.new(params[:campaign])
     if @campaign.save
-      redirect_to campaigns_path, notice: "Campaign [#{@campaign.id}] was successfully created."
+      redirect_to campaigns_path(:params => {'q[s]' => "id desc"}), notice: "Campaign [#{@campaign.id}] was successfully created."
     else
       render action: "new"
     end
@@ -32,7 +32,7 @@ class CampaignsController < ApplicationController
   def update
     @campaign = Campaign.find(params[:id])
     if @campaign.update_attributes(params[:campaign])
-      redirect_to campaigns_path, notice: "Campaign [#{@campaign.id}] was successfully updated."
+      redirect_to @campaign, notice: "Campaign [#{@campaign.id}] was successfully updated."
     else
       render action: "edit"
     end
@@ -42,7 +42,7 @@ class CampaignsController < ApplicationController
     campaign_to_duplicate = Campaign.find(params[:id])
     new_campaign = campaign_to_duplicate.dup
     new_campaign.save
-    redirect_to campaigns_path, notice: "Campaign [#{campaign_to_duplicate.id}] was successfully duplicated to Campaign [#{new_campaign.id}]."
+    redirect_to campaigns_path(:params => {'q[s]' => "id desc"}), notice: "Campaign [#{campaign_to_duplicate.id}] was successfully duplicated to Campaign [#{new_campaign.id}]."
   end
 
   def destroy

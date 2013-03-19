@@ -9,31 +9,9 @@
   <h1>Transactions <%= link_to 'Add new transaction', new_transaction_path, :class => "btn btn-mini" %></h1>
 </div>
 
-<div style='background:#eee;padding:20px;margin-bottom:20px'>
-	<p><strong>Temp csv upload form</strong></p>
-	<%= form_tag('/transactions/upload', :multipart => true) do %>
-	  <%= file_field_tag :file %>
-	  <%= submit_tag %>
-	<% end %>
-</div>
+<%= render 'upload' %>
 
-<div style="background:#ccc;padding:20px;margin-bottom:20px">
-	<p>Sales Turnover: &pound;<%= @credit.total %></p>
-	<p>Cost of Sales: &pound;0.00</p>
-	<p>---</p>
-	<p>Gross Profit: &pound;<%= @credit.total %></p>
-	<p>Admin Expenses: &pound;<%= @debit.total %></p>
-	<p>---</p>
-	<p>Operating Profit: &pound;<%= @credit.total - @debit.total %></p>
-	<p>---</p>
-	<p>Corporation Tax: &pound;<%= (@credit.total - @debit.total) * 0.2 %></p>
-	<p>Profit (Loss) after Tax: &pound;<%= (@credit.total - @debit.total) - ((@credit.total - @debit.total) * 0.2) %></p>
-	<p>---</p>
-	<p>Dividends: &pound;<%= @dividends.total %></p>
-	<p style="font-weight:bold;color:#c00">NEED TO CHECK TRANSACTIONS MARKED AS 'D' ARE ACTUALLY DIVIDENDS AND NOT WAGES (shouldn't make a big difference but it should be correct)</p>
-	<p>---</p>
-	<p>Retained Profit (Loss) for the year: &pound;<%= ((@credit.total - @debit.total) - ((@credit.total - @debit.total) * 0.2)) - @dividends.total %></p>
-</div>
+<hr>
 
 <table class='table table-condensed table-striped table-hover'>
 	<thead>

@@ -1,11 +1,14 @@
-<%= simple_form_for(@sale) do |f| %>
+<%= simple_form_for(@sale, :html => {:class => 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.association :client %>
+    <%= f.input :quote, :input_html => {:class => 'span1' }, order: [:day, :month, :year], prompt: "" %>
+    <%= f.input :invoice, :input_html => {:class => 'span1' }, order: [:day, :month, :year], prompt: "" %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to "Cancel", sales_path, :class => 'btn pull-right' %>
   </div>
 <% end %>

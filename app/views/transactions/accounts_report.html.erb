@@ -1,0 +1,72 @@
+<div class="page-header">
+  <h1>P&amp;L / BalSht (<%= params[:y] %> - <%= params[:z] %>)</h1>
+</div>
+
+<%= @sql %>
+
+<table class='table table-condensed table-striped table-hover'>
+	<thead>
+	  <tr>
+	  	<th>October 31st <%= params[:y] %></th>
+	    <th></th>
+	    <th>October 31st <%= params[:z] %></th>
+	  </tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td></td>
+			<td>Sales Turnover</td>
+			<td><%= @sales_turnover %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Cost of Sales</td>
+			<td><%= @cost_of_sales %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Gross Profit</td>
+			<td><%= @gross_profit %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Directors Wages - 21600</td>
+			<td><%= @directors_wages %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Other Expenses</td>
+			<td><%= @other_expenses %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Administrative Expenses</td>
+			<td><%= @admin_expenses %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Operating Profit</td>
+			<td><%= @operating_profit %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Corporation tax</td>
+			<td><%= @corp_tax %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Profit (Loss) After Tax</td>
+			<td><%= @profit_after_tax %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Dividends</td>
+			<td><%= @dividends %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Retained Profit (Loss) for the year</td>
+			<td><%= @retained_profit %></td>
+		</tr>		
+	</tbody>
+</table>

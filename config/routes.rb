@@ -1,10 +1,12 @@
 Bwmanager::Application.routes.draw do
 
-  match "/transactions/upload" => "transactions#upload"
+  match "/transactions/accounts_report" => "transactions#accounts_report", :as => "accounts_report"
+  match "/transactions/upload" => "transactions#upload", :as => "upload_transactions"
   resources :transactions
 
-  resources :sales
-  resources :sale_lines
+  resources :sales do
+    resources :sale_lines
+  end
 
   resources :keyphrases
 

@@ -1,10 +1,19 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1>
+  	Sale [<%= @sale.id %>] <small><%= @sale.client.name %> (<%= @sale.client.company %>)</small>
+  	<div class='pull-right'>
+  		<%= link_to ("<i class='icon-pencil'></i> Edit Sale").html_safe, edit_sale_path(@sale), :class => 'btn' %>
+  		<%= link_to "Back", sales_path, :class => 'btn' %>
+  	</div>  	
+	</h1>
+</div>
 
 <p>
-  <b>Client:</b>
-  <%= @sale.client %>
+  <b>Quoted:</b>
+  <%= l @sale.quote unless @sale.quote.nil? %>
 </p>
 
-
-<%= link_to 'Edit', edit_sale_path(@sale) %> |
-<%= link_to 'Back', sales_path %>
+<p>
+	<b>Invoiced:</b>
+	<%= l @sale.invoice unless @sale.invoice.nil? %>
+</p>

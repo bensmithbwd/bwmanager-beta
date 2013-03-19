@@ -4,16 +4,12 @@ class TransactionsController < ApplicationController
   def index
     @q = Transaction.search(params[:q])
     @transactions = @q.result(:distinct => true).paginate(:page => params[:page], :per_page => 30)
-    
-    @credit = Transaction.select("SUM(credit) as total").first
-    @debit = Transaction.select("SUM(debit) as total").where("ttype != 'D'").first
-    @dividends = Transaction.select("SUM(debit) as total").where("ttype = 'D'").first
   end
-
+  
   def upload
     require 'csv'
-    CSV.parse(params[:file].read, :headers => true, :col_sep => ",") do |row|
-      
+    
+    CSV.parse(params[:file].read, :headers => true, :col_sep => ",") do |row|      
       # reset transaction type for each row
       transaction_type = ""
       
@@ -22,9 +18,37 @@ class TransactionsController < ApplicationController
         if row[5] == "600.00" then transaction_type = "W" else transaction_type = "D" end
       end
       
+      # we'll now check for some costs
+      if row[4].include?("HOSTGATOR") || row[4].include?("1&1")
+        transaction_type = "C"
+      end
+      
       Transaction.create(:date => row[0], :description => row[4], :debit => row[5], :credit => row[6], :balance => row[7], :ttype => transaction_type)
     end
+    
     redirect_to transactions_path
+  end
+  
+  def accounts_report
+    y = "#{params[:y]}-11-01"
+    z = "#{params[:z]}-10-31"
+    
+    @accounts = Transaction.range(y, z)
+    
+    @sales_turnover = @accounts.credit_total
+    @cost_of_sales = @accounts.by_type('C').debit_total
+    @gross_profit = @sales_turnover - @cost_of_sales
+    @directors_wages = @accounts.by_type('W').debit_total
+    
+    # work out dividends early so we can establish 'other expenses'
+    @dividends = @accounts.by_type('D').debit_total
+    
+    @other_expenses = @accounts.debit_total - (@cost_of_sales + @directors_wages + @dividends)
+    @admin_expenses = (@other_expenses + @directors_wages)
+    @operating_profit = @gross_profit - @admin_expenses
+    @corp_tax = @operating_profit * 0.2
+    @profit_after_tax = @operating_profit - @corp_tax
+    @retained_profit = @profit_after_tax - @dividends
   end
   
   def show

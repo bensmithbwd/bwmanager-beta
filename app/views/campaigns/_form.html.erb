@@ -1,28 +1,28 @@
 <%= simple_form_for(@campaign, :html => {:class => 'form-horizontal' }) do |f| %>
   <%= f.error_notification %>
 
-<div class="row">
-  <div class="span6">
-  <div class="form-inputs">
-    <%= f.association :client, :collection => Client.order("name,company ASC"), label_method: lambda { |client| "#{client.name} (#{client.company})" }, :input_html => {:class => 'client_id_ajax' } %>
-    <%= f.association :url, :collection => Url.order("url ASC"), label_method: :url, :input_html => {:class => 'url_id_ajax' } %>
-    <%= f.association :keyphrase, :collection => Keyphrase.order("keyphrase ASC"), label_method: :keyphrase, :input_html => {:class => 'keyphrase_id_ajax' } %>
-    <%= f.input :start, :input_html => {:class => 'span1' }, order: [:day, :month, :year] %>
-    <%= f.input :length, :input_html => { :class => 'span1' } %>
-    <%= f.input :autoemails, :input_html => { :class => 'span1' } %>
-  </div>  	
-  </div>
-  <div class="span6">
-    <%= f.input :ctype, :input_html => {:class => 'span2' }, collection: ["T1","T2","GEN"], prompt: "Select..." %>
-    <%= f.input :ttype, :input_html => {:class => 'span2' }, collection: ["X1 2 T Content","X1 2 T Forum Profile","X1 2 T Web Profile","X1 4 Way All Modules","X1 Profile","X1 Single SN","X1 Single T FM","X3 2 T All Modules","X3 2 T FM","X3 2 T SNP","X3 3 T SN","X3 3 T Web Profile","X3 3 Way SN","X3 Profile","X3 Web Profile","X8 Profile","X8 SB","X8 Web Profile"], prompt: "Select..." %>
-    <%= f.input :links, :input_html => { :rows => 3, :class => 'span4' } if params[:action] != 'new' %>
-    <%= f.input :complete if params[:action] != 'new' %>
-    <%= f.input :links_index, :input_html => {:class => 'span1' }, order: [:day, :month, :year], prompt: "" if params[:action] != 'new' %>
-  </div>
-</div>
+	<div class="row">
+	  <div class="span6">
+	  <div class="form-inputs">
+	    <%= f.association :client, :collection => Client.order("name,company ASC"), label_method: lambda { |client| "#{client.name} (#{client.company})" }, :input_html => {:class => 'client_id_ajax' } %>
+	    <%= f.association :url, :collection => Url.order("url ASC"), label_method: :url, :input_html => {:class => 'url_id_ajax' } %>
+	    <%= f.association :keyphrase, :collection => Keyphrase.order("keyphrase ASC"), label_method: :keyphrase, :input_html => {:class => 'keyphrase_id_ajax' } %>
+	    <%= f.input :start, :input_html => {:class => 'span1' }, order: [:day, :month, :year] %>
+	    <%= f.input :length, :input_html => { :class => 'span1' } %>
+	    <%= f.input :autoemails, :input_html => { :class => 'span1' } %>
+	  </div>  	
+	  </div>
+	  <div class="span6">
+	    <%= f.input :ctype, :input_html => {:class => 'span2' }, collection: ["T1","T2","GEN"], prompt: "Select..." %>
+	    <%= f.input :ttype, :input_html => {:class => 'span2' }, collection: ["X1 2 T Content","X1 2 T Forum Profile","X1 2 T Web Profile","X1 4 Way All Modules","X1 Profile","X1 Single SN","X1 Single T FM","X3 2 T All Modules","X3 2 T FM","X3 2 T SNP","X3 3 T SN","X3 3 T Web Profile","X3 3 Way SN","X3 Profile","X3 Web Profile","X8 Profile","X8 SB","X8 Web Profile"], prompt: "Select..." %>
+	    <%= f.input :links, :input_html => { :rows => 3, :class => 'span4' } if params[:action] != 'new' %>
+	    <%= f.input :complete if params[:action] != 'new' %>
+	    <%= f.input :links_index, :input_html => {:class => 'span1' }, order: [:day, :month, :year], prompt: "" if params[:action] != 'new' %>
+	  </div>
+	</div>
 
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to "Cancel", campaigns_path, :class => 'btn pull-right' %>
+    <%= link_to "Cancel", campaigns_path(:params => {'q[s]' => "id desc"}), :class => 'btn pull-right' %>
   </div>
 <% end %>

@@ -31,3 +31,9 @@ table {font-size: 12px}
 .calendar .day {height: 40px; width: 14%}
 .calendar .wday-6, .calendar .wday-0 {width: 15%}
 .calendar .badge {padding-left: 5px; padding-right: 5px}
+
+.transactions-upload {background-color: #eee; border: 1px dotted #999; border-radius: 10px; padding: 20px}
+.transactions-upload input, .transactions-upload label {display: inline; margin-left: 20px}
+.transactions-upload .file_upload {background: #fff; padding: 0 5px; border-radius: 4px; border: 1px solid #ccc}
+
+.td-fixed {overflow: hidden; white-space: nowrap}

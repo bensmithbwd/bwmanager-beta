@@ -1,4 +1,6 @@
 class SaleLinesController < ApplicationController
+  load_and_authorize_resource
+  
   # GET /sale_lines
   # GET /sale_lines.json
   def index

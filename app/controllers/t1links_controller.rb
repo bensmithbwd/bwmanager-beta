@@ -21,7 +21,7 @@ class T1linksController < ApplicationController
   def create
     @t1link = T1link.new(params[:t1link])
     if @t1link.save
-      redirect_to @t1link, notice: "T1links [#{@t1link.id}] was successfully created."
+      redirect_to t1links_path, notice: "T1links [#{@t1link.id}] was successfully created."
     else
       render action: "new"
     end
@@ -30,7 +30,7 @@ class T1linksController < ApplicationController
   def update
     @t1link = T1link.find(params[:id])
     if @t1link.update_attributes(params[:t1link])
-      redirect_to @t1link, notice: "T1links [#{@t1link.id}] was successfully updated."
+      redirect_to t1links_path, notice: "T1links [#{@t1link.id}] was successfully updated."
     else
       render action: "edit"
     end

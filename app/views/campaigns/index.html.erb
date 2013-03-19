@@ -31,9 +31,9 @@
 <% @campaigns.each do |campaign| %>
   <tr>
     <td><%= campaign.id %></td>
-    <td><%= campaign.client.name %> (<%= campaign.client.company %>)</td>
-    <td><%= campaign.url.url %></td>
-    <td><%= campaign.keyphrase.keyphrase %></td>
+    <td><div class='td-fixed' style='width:220px' title='<%= campaign.client.name %> (<%= campaign.client.company %>)'><%= campaign.client.name %> (<%= campaign.client.company %>)</div></td>
+    <td><div class='td-fixed' style='width:220px' title='<%= campaign.url.url %>'><%= campaign.url.url %></div></td>
+    <td><div class='td-fixed' style='width:220px' title='<%= campaign.keyphrase.keyphrase %>'><%= campaign.keyphrase.keyphrase %></div></td>
     <td><%= campaign.ctype %></td>
     <!--<td><%= campaign.ttype %></td>
     <td><%= l campaign.start %></td>-->

@@ -1,23 +1,39 @@
-<h1>Listing sales</h1>
-
-<table>
-  <tr>
-    <th>Client</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @sales.each do |sale| %>
-  <tr>
-    <td><%= sale.client.name %></td>
-    <td><%= link_to 'Show', sale %></td>
-    <td><%= link_to 'Edit', edit_sale_path(sale) %></td>
-    <td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<%= search_form_for(@q, :html => {:class => 'form-inline' }) do |f| %>
+  <div class="pull-right">
+    <%= f.text_field :client_name_cont, :class => 'span2 search-query', :placeholder => 'Search...' %>
+    <%= link_to ("<p class='text-right'><br><i class='icon-remove'></i> Remove Filters</p>").html_safe, sales_path if params[:q] %>
+  </div>
 <% end %>
+
+<div class="page-header">
+  <h1>Sales <%= link_to 'Add new sale', new_sale_path, :class => "btn btn-mini" %></h1>
+</div>
+
+<table class='table table-condensed table-striped table-hover'>
+	<thead>
+	  <tr>
+	  	<th><%= sort_link @q, :id, "#" %></th>
+	    <th><%= sort_link @q, :client_name, "Client" %></th>
+	    <th><%= sort_link @q, :quote, "Quoted" %></th>
+	    <th><%= sort_link @q, :invoice, "Invoiced" %></th>
+	    <th class='span2'></th>
+	  </tr>
+	</thead>
+	<tbody>
+		<% @sales.each do |sale| %>
+		  <tr>
+		    <td><%= sale.id %></td>
+		    <td><%= sale.client.name %></td>
+		    <td><%= l sale.quote unless sale.quote.nil? %></td>
+		    <td><%= l sale.invoice unless sale.invoice.nil? %></td>
+		    <td>
+		    	<%= link_to ("<i class='icon-search icon-white'></i>").html_safe, sale, :class => 'btn btn-mini btn-info' %>
+		    	<%= link_to ("<i class='icon-pencil'></i>").html_safe, edit_sale_path(sale), :class => 'btn btn-mini' %>
+		    	<%= link_to ("<i class='icon-trash icon-white'></i>").html_safe, sale, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: "Are you sure you wish to DELETE Sale [#{sale.id}]?" } %>
+		    </td>
+		  </tr>
+		<% end %>
+	</tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Sale', new_sale_path %>
+<%= will_paginate @sales %>

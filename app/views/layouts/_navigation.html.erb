@@ -26,7 +26,8 @@
 		<% if current_user.has_role? :admin %>
 		
 				<li class="<%= 'active' if params[:controller] == 'clients' %>"><%= link_to 'Clients', clients_path(:params => {'q[s]' => "id desc"}) %></li>
-				
+				<li class="<%= 'active' if params[:controller] == 'sales' %>"><%= link_to 'Sales', sales_path %></li>
+
 				<% seo_dropdown = ['campaigns','urls','keyphrases','t1links'] %>
 				<li class="<%= 'active' if seo_dropdown.include?(params[:controller]) %> dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">SEO <b class="caret"></b></a>
 					<ul class="dropdown-menu">
@@ -37,11 +38,16 @@
 					</ul>
 				</li>
 				
-				<% accounts_dropdown = ['sales','transactions'] %>
+				<% accounts_dropdown = ['transactions'] %>
 	  		<li class="<%= 'active' if accounts_dropdown.include?(params[:controller]) %> dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Accounts <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-			  		<li class="<%= 'active' if params[:controller] == 'sales' %>"><%= link_to 'Sales', sales_path %></li>
-			  		<li class="<%= 'active' if params[:controller] == 'transactions' %>"><%= link_to 'Transactions', transactions_path %></li>
+			  		<li class="<%= 'active' if current_page?(transactions_path) %> dropdown"><%= link_to 'Transactions', transactions_path %></li>
+			  		<li class="<%= 'active' if current_page?(accounts_report_path) %> dropdown-submenu"><a href="#" onclick="return false;">P&amp;L / BalSht</a>
+			  			<ul class="dropdown-menu">
+			  				<li class="<%= 'active' if current_page?(accounts_report_path) && params[:y] == '2011' %>"><%= link_to "2011-2012", accounts_report_path(:y => 2011, :z => 2012) %></li>
+			  				<li class="<%= 'active' if current_page?(accounts_report_path) && params[:y] == '2012' %>"><%= link_to "2012-2013", accounts_report_path(:y => 2012, :z => 2013) %></li>
+			  			</ul>
+			  		</li>
 			  	</ul>
 			  </li>
 			  
