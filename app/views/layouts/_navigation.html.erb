@@ -25,16 +25,16 @@
 	<% if user_signed_in? %>
 		<% if current_user.has_role? :admin %>
 		
-				<li class="<%= 'active' if params[:controller] == 'clients' %>"><%= link_to 'Clients', clients_path(:params => {'q[s]' => "id desc"}) %></li>
+				<li class="<%= 'active' if params[:controller] == 'clients' %>"><%= link_to 'Clients', clients_path %></li>
 				<li class="<%= 'active' if params[:controller] == 'sales' %>"><%= link_to 'Sales', sales_path %></li>
 
 				<% seo_dropdown = ['campaigns','urls','keyphrases','t1links'] %>
 				<li class="<%= 'active' if seo_dropdown.include?(params[:controller]) %> dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">SEO <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li class="<%= 'active' if params[:controller] == 'campaigns' %>"><%= link_to 'Campaigns', campaigns_path(:params => {'q[s]' => "id desc"}) %></li>
-						<li class="<%= 'active' if params[:controller] == 'urls' %>"><%= link_to 'URLs', urls_path(:params => {'q[s]' => "id desc"}) %></li>
-						<li class="<%= 'active' if params[:controller] == 'keyphrases' %>"><%= link_to 'Keyphrases', keyphrases_path(:params => {'q[s]' => "id desc"}) %></li>
-						<li class="<%= 'active' if params[:controller] == 't1links' %>"><%= link_to 'T1 Links', t1links_path(:params => {'q[s]' => "id desc"}) %></li>
+						<li class="<%= 'active' if params[:controller] == 'campaigns' %>"><%= link_to 'Campaigns', campaigns_path %></li>
+						<li class="<%= 'active' if params[:controller] == 'urls' %>"><%= link_to 'URLs', urls_path %></li>
+						<li class="<%= 'active' if params[:controller] == 'keyphrases' %>"><%= link_to 'Keyphrases', keyphrases_path %></li>
+						<li class="<%= 'active' if params[:controller] == 't1links' %>"><%= link_to 'T1 Links', t1links_path %></li>
 					</ul>
 				</li>
 				

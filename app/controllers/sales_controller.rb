@@ -2,6 +2,7 @@ class SalesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    redirect_to sales_path(:params => {'q[s]' => "id desc"}) unless params[:q]
     @q = Sale.search(params[:q])
     @sales = @q.result(:distinct => true).paginate(:page => params[:page], :per_page => 30)
   end

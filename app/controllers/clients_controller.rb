@@ -2,6 +2,7 @@ class ClientsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    redirect_to clients_path(:params => {'q[s]' => "id desc"}) unless params[:q]
     @q = Client.search(params[:q])
     @clients = @q.result(:distinct => true).paginate(:page => params[:page], :per_page => 30)
   end

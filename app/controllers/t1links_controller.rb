@@ -2,6 +2,7 @@ class T1linksController < ApplicationController
   load_and_authorize_resource
 
   def index
+    redirect_to t1links_path(:params => {'q[s]' => "id desc"}) unless params[:q]
     @q = T1link.search(params[:q])
     @t1links = @q.result(:distinct => true).paginate(:page => params[:page], :per_page => 30)
   end

@@ -1,5 +1,5 @@
 class Client < ActiveRecord::Base
-  has_many :campaigns
+  has_many :campaigns, :dependent => :restrict
   has_many :urls, :through => :campaigns
   has_many :keyphrases, :through => :campaigns
   has_many :sales

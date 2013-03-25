@@ -17,3 +17,48 @@
 	<b>Invoiced:</b>
 	<%= l @sale.invoice unless @sale.invoice.nil? %>
 </p>
+
+<hr>
+
+<table class='table table-condensed table-striped table-hover'>
+	<thead>
+	  <tr>
+	  	<th>Name</th>
+	  	<th>Description</th>
+	  	<th>Amount</th>
+	  	<th>Quantity</th>
+	  	<th>Optional</th>
+	  </tr>
+	</thead>
+	<tbody>
+		<% @sale.sale_lines.each do |sale_line| %>
+		  <tr>
+		    <td><%= sale_line.name %></td>
+		    <td><%= sale_line.description %></td>
+		    <td><%= sale_line.amount %></td>
+		    <td><%= sale_line.quantity %></td>
+		    <td><%= sale_line.optional %></td>
+		  </tr>
+		<% end %>
+	</tbody>
+</table>
+
+<hr>
+
+<%= simple_form_for([@sale, @sale.sale_lines.build], :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description, :input_html => { :rows => 3, :class => 'span4' } %>
+    <%= f.input :amount %>
+    <%= f.input :quantity %>
+    <%= f.input :optional %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to "Cancel", @sale, :class => 'btn pull-right' %>
+  </div>
+<% end %>
+

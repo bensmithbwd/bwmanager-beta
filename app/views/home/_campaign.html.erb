@@ -1,8 +1,8 @@
 <% if days_action <= 0 %>
-	<tr class='warning'>
+	<% if campaign.links.empty? %><tr class='warning'><% else %><tr class='info'><% end %>
 	<% days_display = days_action.abs.to_s << " day".pluralize(days_action.abs) << " left" %>
 <% else %>
-	<tr class='error'>
+	<% if campaign.links.empty? %><tr class='error'><% else %><tr class='info'><% end %>
 	<% days_display = days_action.to_s << " day".pluralize(days_action) << " late" %>
 <% end %>
 

@@ -2,8 +2,9 @@ class CampaignsController < ApplicationController
   load_and_authorize_resource
   
   def index
+    redirect_to campaigns_path(:params => {'q[s]' => "id desc"}) unless params[:q]
     @q = Campaign.search(params[:q])
-    @campaigns = @q.result(:distinct => true).paginate(:page => params[:page], :per_page => 30)
+    @campaigns = @q.result(:distinct => true).paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

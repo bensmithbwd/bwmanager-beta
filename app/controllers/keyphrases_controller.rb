@@ -2,6 +2,7 @@ class KeyphrasesController < ApplicationController
   load_and_authorize_resource
   
   def index
+    redirect_to keyphrases_path(:params => {'q[s]' => "id desc"}) unless params[:q]
     @q = Keyphrase.search(params[:q])
     @keyphrases = @q.result(:distinct => true).paginate(:page => params[:page], :per_page => 30)
   end
